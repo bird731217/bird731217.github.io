@@ -21,9 +21,13 @@ $(document).ready(function () {
 
         getTrainingData(lesson, selectionText);
     });
-
-//Week
-$('#Week').change(function () {
+	
+	
+	bidingCurrnetDate();
+	
+	
+	//Week
+	$('#Week').change(function () {
         var dom = $(this);
 
         var selectionText = dom.val();
@@ -65,3 +69,26 @@ function getTrainingData(speed, distance) {
     $('#ftpZoneTable').append(html);
 }
 
+
+function bidingCurrnetDate()
+{
+	let currentWK='';
+	let now = new Date();
+	let currentMMdd = `${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}`;
+	
+	
+	//currentMMdd='0101'	
+	var mappingArray = weekMapping.filter(function (item) {
+		return item.Date == currentMMdd;
+	});
+	
+	currentWK='01'
+	if(mappingArray.length>0)
+	{
+		currentWK = mappingArray[0].wk;	
+	}	
+	
+	
+	$('#Week').val(currentWK);
+	$('#imgTraining').attr('src', 'img/' + currentWK+ '.jpg');
+}
